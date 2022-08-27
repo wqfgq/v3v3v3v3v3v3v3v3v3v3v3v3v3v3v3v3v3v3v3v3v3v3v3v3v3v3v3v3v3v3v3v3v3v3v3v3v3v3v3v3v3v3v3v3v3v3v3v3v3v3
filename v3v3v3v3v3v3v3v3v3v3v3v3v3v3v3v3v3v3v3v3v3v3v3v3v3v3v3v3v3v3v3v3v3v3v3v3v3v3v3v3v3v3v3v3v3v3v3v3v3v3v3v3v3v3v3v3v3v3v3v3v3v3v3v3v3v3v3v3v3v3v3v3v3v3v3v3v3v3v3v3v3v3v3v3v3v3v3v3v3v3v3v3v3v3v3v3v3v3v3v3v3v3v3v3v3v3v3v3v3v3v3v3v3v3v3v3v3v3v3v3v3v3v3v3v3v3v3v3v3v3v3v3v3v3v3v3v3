@@ -27,7 +27,7 @@ local section = tab:Section{
 
 
 section:Button{
-    Name = "Slammy.Hook (CLICK THIS FIRST)",
+    Name = "Click this first monkey",
     Callback  = function()
     getgenv().Target = false
 -- Configuration
@@ -38,7 +38,7 @@ getgenv().NotifMode = false
 getgenv().PartMode = true
 getgenv().AirshotFunc = true
 getgenv().Partz = "HumanoidRootPart"
-getgenv().View = false
+getgenv().View = true
 
     --
     _G.Types = {
@@ -52,7 +52,7 @@ getgenv().View = false
     Tracer.Name = "gay"	
     Tracer.Anchored = true		
     Tracer.CanCollide = false
-    Tracer.Transparency = 0.8
+    Tracer.Transparency = 0.6
     Tracer.Parent = game.Workspace	
     Tracer.Shape = _G.Types.Block
     Tracer.Size = Vector3.new(4,4,4)
@@ -64,14 +64,14 @@ local mouse = plr:GetMouse()
 local Runserv = game:GetService("RunService")
 
 circle = Drawing.new("Circle")
-circle.Color = Color3.fromRGB(255,255,255)
-circle.Thickness = 0
+circle.Color = Color3.fromRGB(106,13,173)
+circle.Thickness = 3
 circle.NumSides = 732
-circle.Radius = 120
+circle.Radius = 130
 circle.Thickness = 0
 circle.Transparency = 0.7
 circle.Visible = false
-circle.Filled = false
+circle.Filled = true
 
 Runserv.RenderStepped:Connect(function()
     circle.Position = Vector2.new(mouse.X,mouse.Y+35)
@@ -86,7 +86,7 @@ end)
     --
     if getgenv().valiansh == true then
                         game.StarterGui:SetCore("SendNotification", {
-                   Title = "Slammy.HookSlammy.Hook",
+                   Title = "Slammy.Hook",
                    Text = "Already Loaded!",
                    Duration = 5
         
@@ -272,11 +272,100 @@ local toggle = section:Toggle{
     getgenv().Partz = option    
     end
 }
+
+
+
+local section = tab:Section{
+    Name = "Legit",
+    Side = "Right"
+}
+
+section:Button{
+    Name = "Enable Streamable Button",
+    Callback  = function()
+    getgenv().RecurringPoint = "HumanoidRootPart"
+getgenv().Hitbox = "HumanoidRootPart"
+getgenv().Keybind = "q"
+getgenv().AimbotStrengthAmount = 0.27
+getgenv().PredictionAmount = 6.5
+getgenv().Radius = 25
+getgenv().UsePrediction = true
+getgenv().AimbotStrength = false
+getgenv().FirstPerson = true
+getgenv().ThirdPerson = true
+getgenv().TeamCheck = false
+getgenv().Enabled = false
+
+
+
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/tenaaki/GenericAimbot/main/v1.0.0"))()    
+    end
+}
+
+
+
+local toggle = section:Toggle{
+    Name = "TeamCheck",
+    Flag = "Toggle 1",
+    --Default = true,
+    Callback  = function(bool)
+    getgenv().TeamCheck = bool  
+    end
+}
+
+local toggle = section:Toggle{
+    Name = "Enable Smoothness",
+    Flag = "Toggle 1",
+    
+    Callback  = function(bool)
+    getgenv().AimbotStrength = bool  
+    end
+}
+
+local box = section:Box{
+    Name = "Prediction Changer",
+    --Default = "hi",
+    Placeholder = "Prediction Here!",
+    Flag = "Changes Aimlock Prediction",
+    Callback = function(bool)
+      getgenv().PredictionAmount = bool  
+    end
+}
+
+local box = section:Box{
+    Name = "Smoothness Amount",
+    --Default = "hi",
+    Placeholder = "Smoothness Amount",
+    Flag = "Changes Aimlock Prediction",
+    Callback = function(bool)
+      getgenv().AimbotStrengthAmount = bool  
+    end
+}
+
+    local dropdown = section:Dropdown{
+    Name = "Aim Part",
+    --Default = "Option 1",
+    Content = {
+        "Head",
+        "UpperTorso",
+        "HumanoidRootPart",
+        "LowerTorso"
+    },
+    Flag = "Dropdown 1",
+    Callback = function(option)
+    getgenv().Hitbox = option    
+    end
+}
+
+
 local Misc = main:Tab("Misc")
 local section = Misc:Section{
     Name = "Cframe",
     Side = "Left"
 }
+
+
 
 section:Button{
     Name = "Cframe (Z)",
