@@ -281,7 +281,7 @@ local section = tab:Section{
 }
 
 section:Button{
-    Name = "Enable Streamable Button",
+    Name = "Enable Streamable",
     Callback  = function()
     getgenv().RecurringPoint = "HumanoidRootPart"
 getgenv().Hitbox = "HumanoidRootPart"
@@ -294,7 +294,7 @@ getgenv().AimbotStrength = false
 getgenv().FirstPerson = true
 getgenv().ThirdPerson = true
 getgenv().TeamCheck = false
-getgenv().Enabled = false
+getgenv().Enabled = true
 
 
 
