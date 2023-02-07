@@ -1,0 +1,786 @@
+getgenv().Spinbot = false
+getgenv().Jitter = false
+
+local Jit = math.random(30, 90)
+local Angle = 60
+_G.Save0 = game.Players.LocalPlayer.Character.Head.face.Texture
+_G.Save1 = game.Players.LocalPlayer.Character.Animate.idle.Animation1.AnimationId
+_G.Save2 = game.Players.LocalPlayer.Character.Animate.run.RunAnim.AnimationId
+_G.Save3 = game.Players.LocalPlayer.Character.Animate.walk.WalkAnim.AnimationId
+
+game:GetService("RunService").Heartbeat:Connect(
+    function()
+
+        if Spinbot then
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.Angles(0, math.rad(555), 0)
+        end
+        if Jitter then
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
+                CFrame.new(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.Position) *
+                CFrame.Angles(0, math.rad(Angle) + math.rad((math.random(1, 2) == 1 and Jit or -Jit)), 0)
+        end
+
+end) 
+
+_G.PredictionBreaker = false
+
+game.RunService.Heartbeat:Connect(function()
+    if _G.PredictionBreaker then    
+    local CurrentVelocity = game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity
+    game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = Vector3.new(0,0,0)
+    game.RunService.RenderStepped:Wait()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = CurrentVelocity
+    end    
+end)
+
+_G.Desync = false
+
+game.RunService.Heartbeat:Connect(function()
+if _G.Desync then
+local CurrentVelocity = game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.Angles(0,math.rad(0),0)
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.Angles(0,math.rad(7),0)
+game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = Vector3.new(7000,7000,7000)
+game.RunService.RenderStepped:Wait()
+game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = CurrentVelocity
+    end
+end)
+
+getgenv().slammeAA = false 
+
+game:GetService("RunService").heartbeat:Connect(function()
+if getgenv().slammeAA == true then 
+local abc = game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity
+game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = Vector3.new(1,1,1) * (2^16)
+game:GetService("RunService").RenderStepped:Wait()
+game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = abc
+end 
+end)
+
+getgenv().Lettuce = false
+
+
+game:GetService("RunService").Heartbeat:Connect(
+    function()
+        if Lettuce == true then
+
+                pcall(function()
+                    if game.Players.LocalPlayer.Character.Humanoid.Health > 50 then
+                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(0, 999, 0)
+                        if game.Players.LocalPlayer.Character:FindFirstChild("[Lettuce]") == nil or game.Players.LocalPlayer.Backpack:FindFirstChild("[Lettuce]") == nil then
+                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Workspace.Ignored.Shop["[Lettuce] - $5"].Head.CFrame
+                            wait(0.5)
+                            fireclickdetector(game.Workspace.Ignored.Shop["[Lettuce] - $5"].ClickDetector)
+                        end
+                        pcall(function()game.Players.LocalPlayer.Character.Humanoid:EquipTool(game.Players.LocalPlayer.Backpack["[Lettuce]"])end)
+                        pcall(function()
+                            game.Players.LocalPlayer.Character["[Lettuce]"]:Activate()
+                            wait(0.1)
+                            game.Players.LocalPlayer.Character["[Lettuce]"]:Deactivate()
+                        end)
+                    end
+                end)
+        end
+end)
+
+getgenv().Weight = false
+
+
+
+ 
+        if Weight == true then
+   while true do
+     
+        if not game.Players.LocalPlayer.Character:FindFirstChild("[HeavyWeights]") then
+         
+            local k = game.Workspace.Ignored.Shop["[HeavyWeights] - $250"]
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = k.Head.CFrame + Vector3.new(0, 3, 0)
+            if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - k.Head.Position).Magnitude <= 50 then
+                wait(.2)
+                fireclickdetector(k:FindFirstChild("ClickDetector"), 4)
+            end
+        end
+        if not game.Players.LocalPlayer.Character:FindFirstChild("[HeavyWeights]") then
+            tool = game.Players.LocalPlayer.Backpack:WaitForChild("[HeavyWeights]")
+            tool.Parent = game.Players.LocalPlayer.Character
+        end
+        game:GetService("VirtualUser"):ClickButton1(Vector2.new())
+        local d = Vector3.new(-1006.99, -51.1542, -1014.33)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(d)
+   end
+        end
+
+
+_G.SelfCham = Instance.new("Highlight", game.Players.LocalPlayer.Character)
+_G.SelfCham.Enabled = false 
+_G.SelfCham.OutlineColor = Color3.new(255,255,255)
+_G.SelfCham.OutlineTransparency = 0 
+_G.SelfCham.FillColor = Color3.new(255, 255, 255)
+_G.SelfCham.FillTransparency = 0
+
+
+getgenv().BulletTracers = false
+getgenv().bullet_tracer_color = Color3.fromRGB(230, 230, 250)
+---------------------------------------------------------------------------------------------------------------------------
+
+function GetGun()
+    if game.Players.LocalPlayer.Character then
+        for i, v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+            if v:FindFirstChild 'Ammo' then
+                return v
+            end
+        end
+    end
+    return nil
+end
+
+local Services = {
+    Players = game:GetService("Players"),
+    UserInputService = game:GetService("UserInputService"),
+    RunService = game:GetService("RunService"),
+}
+
+local Local = {
+    Player = Services.Players.LocalPlayer,
+    Mouse = Services.Players.LocalPlayer:GetMouse(),
+}
+local Other = {
+    Camera = workspace.CurrentCamera,
+    BeamPart = Instance.new("Part", workspace)
+}
+
+Other.BeamPart.Name = "BeamPart"
+Other.BeamPart.Transparency = 1
+local Settings = {
+    StartColor = getgenv().bullet_tracer_color,
+    EndColor = getgenv().bullet_tracer_color,
+    StartWidth = 3,
+    EndWidth = 3,
+    ShowImpactPoint = false,
+    ImpactTransparency = 0.5,
+    ImpactColor = Color3.new(1, 1, 1),
+    Time = 1,
+}
+game:GetService "RunService".Heartbeat:Connect(function()
+    if game:GetService("Workspace").Ignored:FindFirstChild 'BULLET_RAYS' and getgenv().BulletTracers then
+        game:GetService("Workspace").Ignored.BULLET_RAYS:Destroy()
+    end
+end)
+local funcs = {}
+Local.Mouse.TargetFilter = Other.BeamPart
+function funcs:Beam(v1, v2)
+    v2 = Vector3.new(v2.X - 0.1, v2.Y + 0.2, v2.Z)
+    local colorSequence = ColorSequence.new({
+        ColorSequenceKeypoint.new(0, getgenv().bullet_tracer_color),
+        ColorSequenceKeypoint.new(1, getgenv().bullet_tracer_color),
+    })
+    local Part = Instance.new("Part", Other.BeamPart)
+    Part.Size = Vector3.new(0, 0, 0)
+    Part.Massless = true
+    Part.Transparency = 1
+    Part.CanCollide = false
+    Part.Position = v1
+    Part.Anchored = true
+    local Attachment = Instance.new("Attachment", Part)
+    local Part2 = Instance.new("Part", Other.BeamPart)
+    Part2.Size = Vector3.new(0, 0, 0)
+    Part2.Transparency = 0
+    Part2.CanCollide = false
+    Part2.Position = v2
+    Part2.Anchored = true
+    Part2.Material = Enum.Material.ForceField
+    Part2.Color = Settings.ImpactColor
+    Part2.Massless = true
+    local Attachment2 = Instance.new("Attachment", Part2)
+    local Beam = Instance.new("Beam", Part)
+    Beam.FaceCamera = true
+    Beam.Color = colorSequence
+    Beam.Attachment0 = Attachment
+    Beam.Attachment1 = Attachment2
+    Beam.LightEmission = 6
+    Beam.LightInfluence = 1
+    Beam.Width0 = Settings.StartWidth
+    Beam.Width1 = Settings.EndWidth
+    Beam.Texture = "http://www.roblox.com/asset/?id=9150663556"
+    Beam.TextureSpeed = 2
+    Beam.TextureLength = 1
+    delay(Settings.Time, function()
+        Part:Destroy()
+        Part2:Destroy()
+    end)
+end
+
+spawn(function()
+    while task.wait(0.5) do
+        gun = GetGun()
+        if gun then
+            LastAmmo = gun.Ammo.Value
+            gun.Ammo:GetPropertyChangedSignal("Value"):Connect(function()
+                if getgenv().BulletTracers and gun.Ammo.Value < LastAmmo then
+                    LastAmmo = gun.Ammo.Value
+                    funcs:Beam(gun.Handle.Position, Local.Mouse.hit.p)
+                end
+            end)
+        end
+    end
+end)
+
+
+getgenv().Ordium = {
+    Silent = {
+        SilentToggle = '',
+        Enabled = False,
+        AimPart = "HumanoidRootPart",
+        Prediction = 0.132,
+        ClosestPart = False
+    },
+    FOV = {
+        Visible = False,
+        Radius = 40,
+    },
+
+    Tracer = {
+        TracerToggle = "Q",
+        Enabled = false,
+        AimPart = "HumanoidRootPart",
+        Prediction = 4.8,
+        SmoothnessValue = 0.07,
+        Smoothness = False,
+        TraceClosestPart = False,
+        UseTracerRadius = False,
+        Radius = 150,
+        ShowFOV = false
+    },
+    Resolver = {
+        AutoResolve = false,  -- Keep These Settings, Very Recommended
+        Positive = 80,
+        Negative = -40,
+    },
+
+    Extras = {
+        WallCheck = true,
+        UnlockedOnDeath = false,
+    },
+}
+
+if not LPH_OBFUSCATED then
+    LPH_JIT_MAX = function(...)
+        return (...)
+    end
+    LPH_NO_VIRTUALIZE = function(...)
+        return (...)
+    end
+end
+
+LPH_JIT_MAX(
+    function()
+        local Players, Client, Mouse, RS, Camera, r =
+            game:GetService("Players"),
+            game:GetService("Players").LocalPlayer,
+            game:GetService("Players").LocalPlayer:GetMouse(),
+            game:GetService("RunService"),
+            game.Workspace.CurrentCamera,
+            math.random
+
+        local Circle = Drawing.new("Circle")
+        Circle.Color = Color3.new(1, 1, 1)
+        Circle.Transparency = 0.5
+        Circle.Thickness = 1
+
+        local TracerCircle = Drawing.new("Circle")
+        TracerCircle.Color = Color3.new(1, 1, 1)
+        TracerCircle.Thickness = 1
+
+        local prey
+        local prey2
+        local On
+
+        local Vec2 = function(property)
+            return Vector2.new(property.X, property.Y + (game:GetService("GuiService"):GetGuiInset().Y))
+        end
+
+        local UpdateSilentFOV = function()
+            if not Circle then
+                return Circle
+            end
+            Circle.Visible = getgenv().Ordium.FOV["Visible"]
+            Circle.Radius = getgenv().Ordium.FOV["Radius"] * 3.05
+            Circle.Position = Vec2(Mouse)
+
+            return Circle
+        end
+
+        local UpdateTracerFOV = function()
+            if not TracerCircle then
+                return TracerCircle
+            end
+
+            TracerCircle.Visible = getgenv().Ordium.Tracer["ShowFOV"]
+            TracerCircle.Radius = getgenv().Ordium.Tracer["Radius"]
+            TracerCircle.Position = Vec2(Mouse)
+
+            return TracerCircle
+        end
+
+        game.RunService.RenderStepped:Connect(function ()
+            UpdateTracerFOV()
+            UpdateSilentFOV()
+        end)
+
+        local WallCheck = function(destination, ignore)
+            if getgenv().Ordium.Extras.WallCheck then
+                local Origin = Camera.CFrame.p
+                local CheckRay = Ray.new(Origin, destination - Origin)
+                local Hit = game.workspace:FindPartOnRayWithIgnoreList(CheckRay, ignore)
+                return Hit == nil
+            else
+                return true
+            end
+        end
+
+        local useVelocity = function (player) 
+            player.Character.HumanoidRootPart.Velocity = Vector3.new(0.36, 0.21, 0.34) * 2
+        end
+
+        local checkVelocity = function (player, pos, neg)
+            if player and player.Character:FindFirstChild("Humanoid") then
+                local velocity = player.Character.HumanoidRootPart.Velocity
+                if (velocity.Magnitude > neg or velocity.Magnitude < pos and
+                (not player.Character.Humanoid.Jump == true)) then
+                    useVelocity(player)
+                end
+            end
+            return false
+        end
+
+        task.spawn(function () while task.wait() do if getgenv().Ordium.Resolver.AutoResolve == true then checkVelocity(prey or prey2, getgenv().Ordium.Resolver.Positive, getgenv().Ordium.Resolver.Negative) end end end)
+
+        GetClosestToMouse = function()
+            local Target, Closest = nil, 1 / 0
+
+            for _, v in pairs(Players:GetPlayers()) do
+                if (v.Character and v ~= Client and v.Character:FindFirstChild("HumanoidRootPart")) then
+                    local Position, OnScreen = Camera:WorldToScreenPoint(v.Character.HumanoidRootPart.Position)
+                    local Distance = (Vector2.new(Position.X, Position.Y) - Vector2.new(Mouse.X, Mouse.Y)).Magnitude
+
+                    if
+                        (Circle.Radius > Distance and Distance < Closest and OnScreen and
+                            WallCheck(v.Character.HumanoidRootPart.Position, {Client, v.Character}))
+                     then
+                        Closest = Distance
+                        Target = v
+                    end
+                end
+            end
+            return Target
+        end
+
+        function TargetChecks(Target)
+            if getgenv().Ordium.Extras.UnlockedOnDeath == true and Target.Character then
+                return Target.Character.BodyEffects["K.O"].Value and true or false
+            end
+            return false
+        end
+
+        function PredictionictTargets(Target, Value)
+            return Target.Character[getgenv().Ordium.Silent.AimPart].CFrame +
+                (Target.Character[getgenv().Ordium.Silent.AimPart].Velocity * Value)
+        end
+
+        local WTS = function(Object)
+            local ObjectVector = Camera:WorldToScreenPoint(Object.Position)
+            return Vector2.new(ObjectVector.X, ObjectVector.Y)
+        end
+
+        local IsOnScreen = function(Object)
+            local IsOnScreen = Camera:WorldToScreenPoint(Object.Position)
+            return IsOnScreen
+        end
+
+        local FilterObjs = function(Object)
+            if string.find(Object.Name, "Gun") then
+                return
+            end
+            if table.find({"Part", "MeshPart", "BasePart"}, Object.ClassName) then
+                return true
+            end
+        end
+        GetClosestBodyPart = function(character)
+            local ClosestDistance = 1 / 0
+            local BodyPart = nil
+            if (character and character:GetChildren()) then
+                for _, x in next, character:GetChildren() do
+                    if FilterObjs(x) and IsOnScreen(x) then
+                        local Distance = (WTS(x) - Vector2.new(Mouse.X, Mouse.Y)).Magnitude
+                        if getgenv().Ordium.Tracer.UseTracerRadius == true then
+                            if (TracerCircle.Radius > Distance and Distance < ClosestDistance) then
+                                ClosestDistance = Distance
+                                BodyPart = x
+                            end
+                        else
+                            if (Distance < ClosestDistance) then
+                                ClosestDistance = Distance
+                                BodyPart = x
+                            end
+                        end
+                    end
+                end
+            end
+            return BodyPart
+        end
+
+        Mouse.KeyDown:Connect(
+            function(Key)
+                if (Key == getgenv().Ordium.Tracer.TracerToggle:lower()) then
+                    if getgenv().Ordium.Tracer.Enabled == true then
+                        On = not On
+                        if On then
+                            prey2 = GetClosestToMouse()
+                        else
+                            if prey2 ~= nil then
+                                prey2 = nil
+                            end
+                        end
+                    end
+                end
+                if (Key == getgenv().Ordium.Silent.SilentToggle:lower()) then
+                    if getgenv().Ordium.Silent.Enabled == true then
+                        getgenv().Ordium.Silent.Enabled = false
+                    else
+                        getgenv().Ordium.Silent.Enabled = true
+                    end
+                end
+            end
+        )
+
+        RS.RenderStepped:Connect(
+            function()
+                if prey then
+                    if prey ~= nil and getgenv().Ordium.Silent.Enabled and getgenv().Ordium.Silent.ClosestPart == true then
+                        getgenv().Ordium.Silent["AimPart"] = tostring(GetClosestBodyPart(prey.Character))
+                    end
+                end
+                if prey2 then
+                    if
+                        prey2 ~= nil and not TargetChecks(prey2) and getgenv().Ordium.Tracer.Enabled and
+                            getgenv().Ordium.Tracer.TraceClosestPart == true
+                     then
+                        getgenv().Ordium.Tracer["AimPart"] = tostring(GetClosestBodyPart(prey2.Character))
+                    end
+                end
+            end
+        )
+
+        local TracerPredictioniction = function(Target, Value)
+            return Target.Character[getgenv().Ordium.Tracer.AimPart].Position +
+                (Target.Character[getgenv().Ordium.Tracer.AimPart].Velocity / Value)
+        end
+
+        RS.RenderStepped:Connect(
+            function()
+                if
+                    prey2 ~= nil and not TargetChecks(prey2) and getgenv().Ordium.Tracer.Enabled and
+                        getgenv().Ordium.Tracer.Smoothness == true
+                 then
+                    local Main = CFrame.new(Camera.CFrame.p, TracerPredictioniction(prey2, getgenv().Ordium.Tracer.Prediction))
+                    Camera.CFrame =
+                        Camera.CFrame:Lerp(
+                        Main,
+                        getgenv().Ordium.Tracer.SmoothnessValue,
+                        Enum.EasingStyle.Elastic,
+                        Enum.EasingDirection.InOut,
+                        Enum.EasingStyle.Sine,
+                        Enum.EasingDirection.Out
+                    )
+                elseif prey2 ~= nil and getgenv().Ordium.Tracer.Enabled and getgenv().Ordium.Tracer.Smoothness == false then
+                    Camera.CFrame =
+                        CFrame.new(Camera.CFrame.Position, TracerPredictioniction(prey2, getgenv().Ordium.Tracer.Prediction))
+                end
+            end
+        )
+
+        local grmt = getrawmetatable(game)
+        local index = grmt.__index
+        local properties = {
+            "Hit" 
+        }
+        setreadonly(grmt, false)
+
+        grmt.__index =
+            newcclosure(
+            function(self, v)
+                if Mouse and (table.find(properties, v)) then
+                    prey = GetClosestToMouse()
+                    if prey ~= nil and getgenv().Ordium.Silent.Enabled and not TargetChecks(prey) then
+                        local endpoint = PredictionictTargets(prey, getgenv().Ordium.Silent.Prediction)
+
+                        return (table.find(properties, tostring(v)) and endpoint)
+                    end
+                end
+                return index(self, v)
+            end
+        )
+    end
+)()
+
+local library = loadstring(game:HttpGet("https://pastebin.com/raw/XgzQRZMA"))()
+
+local window = library:new({textsize = 14,font = Enum.Font.Code,name = "Primordial.Lua",color = Color3.fromRGB(110,40,213)})
+
+local tab = window:page({name = "Main"})
+local misc = window:page({name = "Misc"})
+local visual = window:page({name = "Visuals"})
+local silent = tab:section({name = "Silent Aim",side = "left",size = 230})
+local camlock = tab:section({name = "Camlock",side = "right",size = 270})
+local extra = tab:section({name = "Extra's",side = "left",size = 170})
+local mesc = misc:section({name = "Misc",side = "left",size = 315})
+local aa = misc:section({name = "Anti Aim",side = "right",size = 138})
+local self1 = visual:section({name = "Self Chams",side = "left",size = 170})
+local esp = visual:section({name = "Enemy Sighting Position",side = "right",size = 170})
+
+    silent:toggle({name = "Enable",def = false,callback = function(value)
+	getgenv().Ordium.Silent.Enabled = value
+end})
+
+silent:textbox({name = "Prediction",def = "Enter Prediction",placeholder = "Enter Prediction",callback = function(value)
+	getgenv().Ordium.Silent.Prediction = value
+end})
+
+silent:dropdown({name = "AimPart",def = "HumanoidRootPart",max = 10,options = {"Head","UpperTorso","HumanoidRootPart","LowerTorso"},callback = function(chosen)
+	getgenv().Ordium.Silent.AimPart = chosen
+end})
+
+silent:toggle({name = "Closest Part",def = false,callback = function(value)
+	getgenv().Ordium.Silent.ClosestPart = value
+end})
+
+silent:toggle({name = "Show FOV",def = false,callback = function(value)
+	getgenv().Ordium.FOV.Visible = value
+end})
+
+silent:textbox({name = "FOV Size",def = "Enter Size",placeholder = "Enter Size",callback = function(value)
+	getgenv().Ordium.FOV.Radius = value
+end})
+
+camlock:toggle({name = "Enable",def = false,callback = function(value)
+	getgenv().Ordium.Tracer.Enabled = value
+end})
+
+camlock:textbox({name = "Camlock Prediction",def = "Enter Prediction (EX: 7.5)",placeholder = "Enter Size",callback = function(value)
+	getgenv().Ordium.Tracer.Prediction = value
+end})
+
+camlock:dropdown({name = "Aim-Part",def = "HumanoidRootPart",max = 10,options = {"Head","UpperTorso","HumanoidRootPart","LowerTorso"},callback = function(chosen)
+	getgenv().Ordium.Tracer.AimPart = chosen
+end})
+
+camlock:toggle({name = "Camlock ClosestPart",def = false,callback = function(value)
+	getgenv().Ordium.Tracer.TraceClosestPart = value
+end})
+
+
+camlock:toggle({name = "Smoothness",def = false,callback = function(value)
+	getgenv().Ordium.Tracer.Smoothness = value
+end})
+
+camlock:textbox({name = "Smoothness Amount",def = "Enter Smoothness Amount",placeholder = "Enter Smoothness",callback = function(value)
+	getgenv().Ordium.Tracer.SmoothnessValue = value
+end})
+
+
+extra:toggle({name = "Auto Resolve",def = false,callback = function(value)
+	getgenv().Ordium.Resolver.AutoResolve = value
+end})
+
+extra:textbox({name = "Positive Axis",def = "Enter Axis (EX: 50)",placeholder = "Enter Axis",callback = function(value)
+	getgenv().Ordium.Resolver.Positive = value
+end})
+
+extra:textbox({name = "Negitive Axis",def = "Enter Axis (EX: -40)",placeholder = "Enter Axis",callback = function(value)
+	getgenv().Ordium.Resolver.Negitive = value
+end})
+
+extra:toggle({name = "Wall Check",def = true,callback = function(value)
+	getgenv().Ordium.Extras.WallCheck = value
+end})
+
+extra:toggle({name = "Unlock On Death",def = false,callback = function(value)
+	getgenv().Ordium.Extras.UnlockOnDeath = value
+end})
+
+mesc:toggle({name = "Bullet Tracers",def = false,callback = function(value)
+	getgenv().BulletTracers = value
+end})
+
+local picker = mesc:colorpicker({name = "Bullet Color",cpname = nil,def = Color3.fromRGB(255,255,255),callback = function(value)
+	getgenv().bullet_tracer_color = value
+end})
+
+local picker = mesc:colorpicker({name = "Ambient Color",cpname = nil,def = Color3.fromRGB(255,255,255),callback = function(value)
+	game:GetService("Lighting").Ambient = value
+end})
+
+
+mesc:textbox({name = "Fog",def = "EX: 50",placeholder = "Enter Fog",callback = function(value)
+    game.Lighting.FogEnd = value
+end})
+mesc:textbox({name = "Brightness",def = "EX: 50",placeholder = "Enter Brightness",callback = function(value)
+    game:GetService("Lighting").Brightness = value
+end})
+
+mesc:button({name = "Antifling",callback = function()
+                       -- // Constants \\ --
+    -- [ Services ] --
+    local Services = setmetatable({}, {__index = function(Self, Index)
+        local NewService = game.GetService(game, Index)
+        if NewService then
+        Self[Index] = NewService
+        end
+        return NewService
+        end})
+
+        -- [ LocalPlayer ] --
+        local LocalPlayer = Services.Players.LocalPlayer
+
+        -- // Functions \\ --
+        local function PlayerAdded(Player)
+           local Detected = false
+           local Character;
+           local PrimaryPart;
+
+           local function CharacterAdded(NewCharacter)
+               Character = NewCharacter
+               repeat
+                   wait()
+                   PrimaryPart = NewCharacter:FindFirstChild("HumanoidRootPart")
+               until PrimaryPart
+               Detected = false
+           end
+
+           CharacterAdded(Player.Character or Player.CharacterAdded:Wait())
+           Player.CharacterAdded:Connect(CharacterAdded)
+           Services.RunService.Heartbeat:Connect(function()
+               if (Character and Character:IsDescendantOf(workspace)) and (PrimaryPart and PrimaryPart:IsDescendantOf(Character)) then
+                   if PrimaryPart.AssemblyAngularVelocity.Magnitude > 50 or PrimaryPart.AssemblyLinearVelocity.Magnitude > 100 then
+                       if Detected == false then
+                           game.StarterGui:SetCore("ChatMakeSystemMessage", {
+                               Text = "Fling Exploit detected, Player: " .. tostring(Player);
+                               Color = Color3.fromRGB(255, 200, 0);
+                           })
+                       end
+                       Detected = true
+                       for i,v in ipairs(Character:GetDescendants()) do
+                           if v:IsA("BasePart") then
+                               v.CanCollide = false
+                               v.AssemblyAngularVelocity = Vector3.new(0, 0, 0)
+                               v.AssemblyLinearVelocity = Vector3.new(0, 0, 0)
+                               v.CustomPhysicalProperties = PhysicalProperties.new(0, 0, 0)
+                           end
+                       end
+                       PrimaryPart.CanCollide = false
+                       PrimaryPart.AssemblyAngularVelocity = Vector3.new(0, 0, 0)
+                       PrimaryPart.AssemblyLinearVelocity = Vector3.new(0, 0, 0)
+                       PrimaryPart.CustomPhysicalProperties = PhysicalProperties.new(0, 0, 0)
+                   end
+               end
+           end)
+        end
+
+        -- // Event Listeners \\ --
+        for i,v in ipairs(Services.Players:GetPlayers()) do
+           if v ~= LocalPlayer then
+               PlayerAdded(v)
+           end
+        end
+        Services.Players.PlayerAdded:Connect(PlayerAdded)
+
+        local LastPosition = nil
+        Services.RunService.Heartbeat:Connect(function()
+           pcall(function()
+               local PrimaryPart = LocalPlayer.Character.PrimaryPart
+               if PrimaryPart.AssemblyLinearVelocity.Magnitude > 250 or PrimaryPart.AssemblyAngularVelocity.Magnitude > 250 then
+                   PrimaryPart.AssemblyAngularVelocity = Vector3.new(0, 0, 0)
+                   PrimaryPart.AssemblyLinearVelocity = Vector3.new(0, 0, 0)
+                   PrimaryPart.CFrame = LastPosition
+
+                   game.StarterGui:SetCore("ChatMakeSystemMessage", {
+                       Text = "You were flung. Neutralizing velocity.";
+                       Color = Color3.fromRGB(255, 0, 0);
+                   })
+               elseif PrimaryPart.AssemblyLinearVelocity.Magnitude < 50 or PrimaryPart.AssemblyAngularVelocity.Magnitude > 50 then
+                   LastPosition = PrimaryPart.CFrame
+               end
+           end)
+        end)
+                  
+end})
+
+aa:toggle({name = "Legit Desync",def = false, callback = function(value)
+    getgenv().slammeAA = value
+end})
+
+aa:toggle({name = "No Velocity",def = false, callback = function(value)
+    getgenv().PredictionBreaker = value
+end})
+
+aa:toggle({name = "Blatant Desync",def = false, callback = function(value)
+    _G.Desync = value
+end})
+
+
+mesc:button({name = "Rejoin",callback = function()
+      local TeleportService = game:GetService("TeleportService")
+    local Players = game:GetService("Players")
+    local LocalPlayer = Players.LocalPlayer
+
+    local Rejoin = coroutine.create(function()
+        local Success, ErrorMessage = pcall(function()
+            TeleportService:Teleport(game.PlaceId, LocalPlayer)
+        end)
+
+        if ErrorMessage and not Success then
+            warn(ErrorMessage)
+        end
+    end)
+
+    coroutine.resume(Rejoin)
+
+end})
+
+
+
+
+
+mesc:toggle({name = "Lettuce AutoFarm",def = false, callback = function(value)
+    getgenv().Lettuce = value
+end})
+
+aa:toggle({name = "SpinBot",def = false, callback = function(value)
+    getgenv().Spinbot = value
+end})
+
+aa:toggle({name = "Jitter",def = false, callback = function(value)
+getgenv().Jitter = value
+end})
+
+self1:toggle({name = "Enable SelfChams",def = false,callback = function(value)
+	_G.SelfCham.Enabled = value
+end})
+
+local picker = self1:colorpicker({name = "Outline Color",cpname = nil,def = Color3.fromRGB(255,255,255),callback = function(value)
+	_G.SelfCham.OutlineColor = value
+end})
+
+self1:slider({name = "Outline Transparency",def = 0, max = 1,min = 0,rounding = false,ticking = false,measuring = ".",callback = function(value)
+    _G.SelfCham.OutlineTransparency = value
+end})
+
+local picker = self1:colorpicker({name = "Body Color",cpname = "bodycolor",def = Color3.fromRGB(255,255,255),callback = function(value)
+    _G.SelfCham.FillColor = value
+end})
+
+
+self1:slider({name = "Character Transparency",def = 0, max = 1,min = 0,rounding = false,ticking = false,measuring = ".",callback = function(value)
+    _G.SelfCham.FillTransparency = value
+end})
